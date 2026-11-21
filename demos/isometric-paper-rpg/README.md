@@ -1,6 +1,6 @@
 # Isometric Paper RPG (demo)
 
-Small RPG slice: **4×4 pixel dirt board**, isometric Three.js camera, **warrior** (blue sphere) vs **orc** (green sphere) on opposite corners. Sphere placeholders stand in for future Paper Mario–style sprites.
+Small RPG slice: **4×4 pixel dirt board**, isometric Three.js camera, **warrior** vs **orc** as flat **pixel sprites** (no spheres or circular shadows on the ground).
 
 ## Layout
 

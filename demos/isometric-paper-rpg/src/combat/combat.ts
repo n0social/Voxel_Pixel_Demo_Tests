@@ -58,12 +58,8 @@ export class CombatController {
 
 function flashHurt(mesh: THREE.Mesh): void {
   const mat = mesh.material;
-  if (!(mat instanceof THREE.MeshLambertMaterial)) return;
-  const original = mat.emissive.getHex();
-  mat.emissive.setHex(0x662222);
-  mat.emissiveIntensity = 0.6;
-  setTimeout(() => {
-    mat.emissive.setHex(original);
-    mat.emissiveIntensity = 0.15;
-  }, 120);
+  if (!(mat instanceof THREE.MeshBasicMaterial)) return;
+  const original = mat.color.getHex();
+  mat.color.setHex(0xffaaaa);
+  setTimeout(() => mat.color.setHex(original), 120);
 }

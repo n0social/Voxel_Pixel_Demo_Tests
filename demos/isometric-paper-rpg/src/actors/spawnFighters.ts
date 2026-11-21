@@ -26,6 +26,6 @@ export function spawnFighters(scene: THREE.Scene): {
 function faceEachOther(a: THREE.Object3D, b: THREE.Object3D): void {
   const dir = new THREE.Vector3().subVectors(b.position, a.position);
   a.rotation.y = Math.atan2(dir.x, dir.z);
-  const dirB = dir.clone().multiplyScalar(-1);
-  b.rotation.y = Math.atan2(dirB.x, dirB.z);
+  b.rotation.y = a.rotation.y;
+  b.rotateY(Math.PI);
 }

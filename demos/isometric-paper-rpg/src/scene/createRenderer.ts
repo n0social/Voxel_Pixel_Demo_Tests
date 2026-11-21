@@ -5,8 +5,7 @@ export function createRenderer(container: HTMLElement): THREE.WebGLRenderer {
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.enabled = false;
   container.appendChild(renderer.domElement);
   return renderer;
 }

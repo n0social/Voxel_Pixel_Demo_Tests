@@ -20,12 +20,6 @@ scene.add(ambient);
 
 const sun = new THREE.DirectionalLight(0xfff4e0, 0.9);
 sun.position.set(6, 10, 4);
-sun.castShadow = true;
-sun.shadow.mapSize.set(1024, 1024);
-sun.shadow.camera.left = -6;
-sun.shadow.camera.right = 6;
-sun.shadow.camera.top = 6;
-sun.shadow.camera.bottom = -6;
 scene.add(sun);
 
 scene.add(createDirtGrid());
