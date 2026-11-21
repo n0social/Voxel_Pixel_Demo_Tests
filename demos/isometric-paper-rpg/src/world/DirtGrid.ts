@@ -1,22 +1,23 @@
 import * as THREE from "three";
 import { GRID_SIZE } from "./tileCoords";
-import { makePixelTexture, paintDirtTile } from "../textures/pixelTexture";
+import { makePixelTexture, paintDirtField } from "../textures/pixelTexture";
+
+/** Pixels per world unit on the ground (4×4 world → canvas is 4× this size). */
+const PIXELS_PER_UNIT = 32;
 
 export function createDirtGrid(): THREE.Group {
   const group = new THREE.Group();
-  const dirtTex = makePixelTexture(16, 16, paintDirtTile);
+  const px = GRID_SIZE * PIXELS_PER_UNIT;
+  const dirtTex = makePixelTexture(px, px, paintDirtField);
 
-  for (let z = 0; z < GRID_SIZE; z++) {
-    for (let x = 0; x < GRID_SIZE; x++) {
-      const geo = new THREE.PlaneGeometry(1, 1);
-      const mat = new THREE.MeshLambertMaterial({ map: dirtTex });
-      const tile = new THREE.Mesh(geo, mat);
-      tile.rotation.x = -Math.PI / 2;
-      tile.position.set(x + 0.5, 0, z + 0.5);
-      tile.receiveShadow = true;
-      group.add(tile);
-    }
-  }
+  const ground = new THREE.Mesh(
+    new THREE.PlaneGeometry(GRID_SIZE, GRID_SIZE),
+    new THREE.MeshLambertMaterial({ map: dirtTex }),
+  );
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.set(GRID_SIZE / 2, 0, GRID_SIZE / 2);
+  ground.receiveShadow = true;
+  group.add(ground);
 
   const border = new THREE.LineSegments(
     new THREE.EdgesGeometry(new THREE.BoxGeometry(GRID_SIZE, 0.02, GRID_SIZE)),

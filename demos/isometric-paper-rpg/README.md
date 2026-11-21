@@ -5,11 +5,13 @@ Small RPG slice: **4×4 pixel dirt board**, isometric Three.js camera, **warrior
 ## Layout
 
 ```text
-W . . .     W = warrior (0,0)
-. . . .     O = orc (3,3)
+O . . .     O = orc (0,0)
+. . . .     W = warrior (3,3)
 . . . .
-. . . O
+. . . W
 ```
+
+Ground is a **single plane** with a **128×128** pixel dirt texture (not 16 separate tiles).
 
 ## Run
 

@@ -19,19 +19,18 @@ export function makePixelTexture(
   return tex;
 }
 
-export function paintDirtTile(ctx: CanvasRenderingContext2D): void {
+/** One canvas = one continuous pixel field (1×1 px cells). */
+export function paintDirtField(ctx: CanvasRenderingContext2D): void {
   const w = ctx.canvas.width;
   const h = ctx.canvas.height;
   const base = "#6b4f2a";
   const dark = "#4a3520";
   const light = "#8a6840";
-  ctx.fillStyle = base;
-  ctx.fillRect(0, 0, w, h);
-  for (let y = 0; y < h; y += 2) {
-    for (let x = 0; x < w; x += 2) {
-      const n = ((x * 7 + y * 13) % 5) / 5;
-      ctx.fillStyle = n > 0.6 ? light : n < 0.25 ? dark : base;
-      ctx.fillRect(x, y, 2, 2);
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      const n = ((x * 7 + y * 13 + (x >> 2) * (y >> 2)) % 7) / 7;
+      ctx.fillStyle = n > 0.72 ? light : n < 0.28 ? dark : base;
+      ctx.fillRect(x, y, 1, 1);
     }
   }
 }
