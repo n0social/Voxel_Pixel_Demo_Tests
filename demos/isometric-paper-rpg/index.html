@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Isometric Paper RPG</title>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #1a1520;
+        font-family: system-ui, sans-serif;
+      }
+      #app {
+        width: 100%;
+        height: 100%;
+      }
+      #hud {
+        position: fixed;
+        left: 12px;
+        bottom: 12px;
+        color: #e8dcc8;
+        font-size: 13px;
+        line-height: 1.5;
+        pointer-events: none;
+        text-shadow: 0 1px 2px #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="hud">
+      <div><strong>Warrior</strong> (blue) vs <strong>Orc</strong> (green)</div>
+      <div>Space / click — attack · R — reroll dirt</div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
