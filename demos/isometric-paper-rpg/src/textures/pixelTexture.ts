@@ -24,19 +24,16 @@ export function makePixelTexture(
 /** Macro pixel size on the ground canvas (sharp squares, not pointillism). */
 const GROUND_PIXEL = 2;
 
+const DIRT_COLORS = ["#6b4f2a", "#4a3520", "#8a6840"] as const;
+
 export function paintDirtField(ctx: CanvasRenderingContext2D): void {
   const w = ctx.canvas.width;
   const h = ctx.canvas.height;
-  const base = "#6b4f2a";
-  const dark = "#4a3520";
-  const light = "#8a6840";
 
   for (let y = 0; y < h; y += GROUND_PIXEL) {
     for (let x = 0; x < w; x += GROUND_PIXEL) {
-      const gx = Math.floor(x / GROUND_PIXEL);
-      const gy = Math.floor(y / GROUND_PIXEL);
-      const n = (gx * 7 + gy * 13) % 5;
-      ctx.fillStyle = n === 0 ? dark : n === 1 ? light : base;
+      const i = Math.floor(Math.random() * DIRT_COLORS.length);
+      ctx.fillStyle = DIRT_COLORS[i]!;
       ctx.fillRect(x, y, GROUND_PIXEL, GROUND_PIXEL);
     }
   }
