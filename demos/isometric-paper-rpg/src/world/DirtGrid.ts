@@ -1,10 +1,19 @@
 import * as THREE from "three";
 import { GRID_SIZE } from "./tileCoords";
-import { makePixelTexture, paintDirtField } from "../textures/pixelTexture";
+import {
+  makePixelTexture,
+  paintDirtField,
+  repaintDirtTexture,
+} from "../textures/pixelTexture";
 
 const PIXELS_PER_UNIT = 32;
 
-export function createDirtGrid(): THREE.Group {
+export type DirtGridHandle = {
+  group: THREE.Group;
+  reroll: () => void;
+};
+
+export function createDirtGrid(): DirtGridHandle {
   const group = new THREE.Group();
   const px = GRID_SIZE * PIXELS_PER_UNIT;
   const dirtTex = makePixelTexture(px, px, paintDirtField);
@@ -24,5 +33,8 @@ export function createDirtGrid(): THREE.Group {
   border.position.set(GRID_SIZE / 2, 0.01, GRID_SIZE / 2);
   group.add(border);
 
-  return group;
+  return {
+    group,
+    reroll: () => repaintDirtTexture(dirtTex),
+  };
 }

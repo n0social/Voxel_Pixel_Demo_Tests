@@ -22,7 +22,8 @@ const sun = new THREE.DirectionalLight(0xfff4e0, 0.9);
 sun.position.set(6, 10, 4);
 scene.add(sun);
 
-scene.add(createDirtGrid());
+const dirt = createDirtGrid();
+scene.add(dirt.group);
 const { warrior, orc } = spawnFighters(scene);
 const combat = new CombatController(warrior, orc);
 
@@ -31,6 +32,9 @@ window.addEventListener("keydown", (e) => {
   if (e.code === "Space") {
     e.preventDefault();
     onAttack();
+  }
+  if (e.code === "KeyR") {
+    dirt.reroll();
   }
 });
 renderer.domElement.addEventListener("click", onAttack);

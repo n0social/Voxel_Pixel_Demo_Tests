@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { entropicRng, randomIndex } from "./random";
 
 export function makePixelTexture(
   width: number,
@@ -32,11 +33,20 @@ export function paintDirtField(ctx: CanvasRenderingContext2D): void {
 
   for (let y = 0; y < h; y += GROUND_PIXEL) {
     for (let x = 0; x < w; x += GROUND_PIXEL) {
-      const i = Math.floor(Math.random() * DIRT_COLORS.length);
+      const cellRng = entropicRng();
+      const i = randomIndex(cellRng, DIRT_COLORS.length);
       ctx.fillStyle = DIRT_COLORS[i]!;
       ctx.fillRect(x, y, GROUND_PIXEL, GROUND_PIXEL);
     }
   }
+}
+
+export function repaintDirtTexture(tex: THREE.CanvasTexture): void {
+  const canvas = tex.image as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  paintDirtField(ctx);
+  tex.needsUpdate = true;
 }
 
 type Pixel = { x: number; y: number; c: string };
